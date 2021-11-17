@@ -69,13 +69,13 @@ Civilizacion Menu::pedirDatos()
     cout << "\n\tNombre: ";
     getline(cin, nombre);
 
-    cout << "\n\tUbicacion en X: ";
+    cout << "\tUbicacion en X: ";
     cin >> x;
 
-    cout << "\n\tUbicacion en Y: ";
+    cout << "\tUbicacion en Y: ";
     cin >> y;
 
-    cout << "\n\tPuntuacion: ";
+    cout << "\tPuntuacion: ";
     cin >> puntuacion;
     
     c.setNombre(nombre);
@@ -99,6 +99,7 @@ void Menu::op1(VideoGame &vg)
 void Menu::op2(VideoGame &vg)
 {
     system("cls");
+    printCabecera("AGREGAR",45);
     Civilizacion c = pedirDatos();
     vg.agregarCivilizacion(c);
     mnsj_exito();
@@ -108,6 +109,7 @@ void Menu::op3(VideoGame &vg)
 {
     size_t p;
 
+    printCabecera("INSERTAR",45);
     cout << "\n\tPosicion a insertar: ";
     cin >> p;
 
@@ -125,6 +127,7 @@ void Menu::op4(VideoGame &vg)
 {
     size_t n;
     
+    printCabecera("INICIALIZAR",45);
     cout << "\n\tNumero de civilizaciones: ";
     cin >> n;
 
@@ -208,7 +211,7 @@ void Menu::op8(VideoGame &vg)
         return;
     }
     string n;
-    printCabecera("ELIMINAR", 30);
+    printCabecera("ELIMINAR", 45);
     cout << "\n\tNombre de la civilizacion: "; cin.ignore();
     getline(cin, n);
 
@@ -222,9 +225,12 @@ void Menu::op9(VideoGame &vg)
         return;
     }
     string n;
-    printCabecera("BUSCAR",30);
+    printCabecera("BUSCAR",45);
     cout << "\n\tNombre de la civilizacion: "; cin.ignore();
     getline(cin, n);
+
+    system("cls");
+    printCabecera("RESULTADO DE LA BUSQUEDA",75);
     vg.buscar(n);
     getch();
 }
@@ -235,11 +241,14 @@ void Menu::op10(VideoGame &vg)
         mnsj_error();
         return;
     }
-    
+
+    printCabecera("MODIFICAR",75);
     cout << "\n\n\tNombre de la civilizacion: "; cin.ignore();
     string n;
     getline(cin, n);
 
+    cout << endl << endl;
+    printCabecera("RESULTADO",75);
     Civilizacion *ptr = vg.buscar(n);
     if(ptr == nullptr){
         getch();
@@ -248,6 +257,8 @@ void Menu::op10(VideoGame &vg)
     getch();
     system("cls");
     size_t op;
+
+    printCabecera("MODIFICAR",25);
     cout << "\n\n\t1) Nombre";
     cout << "\n\t2) Ubicacion";
     cout << "\n\t3) Puntuacion";
@@ -259,11 +270,11 @@ void Menu::op10(VideoGame &vg)
     printCabecera("INFORMACION ACTUAL", 75);
     ptr->print();
 
+    cout << endl << endl << endl;
     printCabecera("INFORMACION NUEVA", 75);
 
     string s;
     int i;
-
     switch (op)
     {
     case 1:
@@ -306,5 +317,6 @@ void Menu::op11(VideoGame &vg)
     vg.mostrar();
     getch();
 }
+ 
 
 #endif // MENU_H
