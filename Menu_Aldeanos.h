@@ -8,7 +8,7 @@
 class Menu_Aldeanos : public Menu
 {
 private:
-    Civilizacion cv;
+    Civilizacion *cv;
 public:
     Menu_Aldeanos(Civilizacion &c);
     size_t selection();

@@ -6,7 +6,7 @@
 
 Menu_Aldeanos::Menu_Aldeanos(Civilizacion &c)
 {
-    cv = c;
+    cv = &c;
     items = {"Agregar", "Eliminar", "Clasificar", "Buscar", "Modificar", "Mostrar", "Regresar"};
 }
 size_t Menu_Aldeanos::selection()
@@ -73,16 +73,16 @@ Aldeano pedir_datos()
     return a;
 }
 
-void process_1_1(Civilizacion &cv)
+void process_1_1(Civilizacion *cv)
 {
     Aldeano a = pedir_datos();
-    cv.agregarInicio(a);
+    cv->agregarInicio(a);
     mnsj_exito();
 }
-void process_1_2(Civilizacion &cv)
+void process_1_2(Civilizacion *cv)
 {
     Aldeano a = pedir_datos();
-    cv.agregarFinal(a);
+    cv->agregarFinal(a);
     mnsj_exito();
 }
 void Menu_Aldeanos::process_1()
@@ -112,33 +112,33 @@ void Menu_Aldeanos::process_1()
     }
 }
 
-void process_2_1(Civilizacion &cv)
+void process_2_1(Civilizacion *cv)
 {
     cout << "\n\tNombre: "; cin.ignore();
     string n;
     getline(cin, n);
 
-    cv.eliminarNombre(n);
+    cv->eliminarNombre(n);
     mnsj_exito();
 }
-void process_2_2(Civilizacion &cv)
+void process_2_2(Civilizacion *cv)
 {
     cout << "\n\tSalud: ";
     int s;
     cin >> s;
 
-    cv.eliminarSalud(s);
+    cv->eliminarSalud(s);
     mnsj_exito();
 }
-void process_2_3(Civilizacion &cv)
+void process_2_3(Civilizacion *cv)
 {
     system("cls");
-    cv.eliminarEdad();
+    cv->eliminarEdad();
     mnsj_exito();
 }
 void Menu_Aldeanos::process_2()
 {
-    if(cv.total() == 0){
+    if(cv->total() == 0){
         mnsj_error();
         return;
     }
@@ -171,7 +171,7 @@ void Menu_Aldeanos::process_2()
 
 void Menu_Aldeanos::process_3()
 {
-    if(cv.total() == 0){
+    if(cv->total() == 0){
         mnsj_error();
         return;
     }
@@ -188,15 +188,15 @@ void Menu_Aldeanos::process_3()
     switch (op)
     {
     case 1:
-        cv.ordenarNombre();
+        cv->ordenarNombre();
         mnsj_exito();
         break;
     case 2:
-        cv.ordenarSalud();
+        cv->ordenarSalud();
         mnsj_exito();
         break;
     case 3:
-        cv.ordenarEdad();
+        cv->ordenarEdad();
         mnsj_exito();
         break;
     default:
@@ -207,7 +207,7 @@ void Menu_Aldeanos::process_3()
 
 void Menu_Aldeanos::process_4()
 {
-    if(cv.total() == 0){
+    if(cv->total() == 0){
         mnsj_error();
         return;
     }
@@ -216,7 +216,7 @@ void Menu_Aldeanos::process_4()
     string n;
     getline(cin, n);
 
-    Aldeano *ptr = cv.buscarAldeano(n);
+    Aldeano *ptr = cv->buscarAldeano(n);
     if(ptr == nullptr){
         cout << "\n\n\tNo se encontro el elemento.";
         getch();
@@ -227,36 +227,36 @@ void Menu_Aldeanos::process_4()
     getch();
 }
 
-void process_5_1(Aldeano &a)
+void process_5_1(Aldeano *a)
 {
     cout << "\n\tNombre: "; cin.ignore();
     string n;
     getline(cin, n);
 
-    a.setNombre(n);
+    a->setNombre(n);
     mnsj_exito();
 }
-void process_5_2(Aldeano &a)
+void process_5_2(Aldeano *a)
 {
     cout << "\n\tSalud: ";
     int i;
     cin >> i;
 
-    a.setSalud(i);
+    a->setSalud(i);
     mnsj_exito();
 }
-void process_5_3(Aldeano &a)
+void process_5_3(Aldeano *a)
 {
     cout << "\n\tEdad: ";
     int i;
     cin >> i;
 
-    a.setEdad(i);
+    a->setEdad(i);
     mnsj_exito();
 }
 void Menu_Aldeanos::process_5()
 {
-    if(cv.total() == 0){
+    if(cv->total() == 0){
         mnsj_error();
         return;
     }
@@ -265,7 +265,7 @@ void Menu_Aldeanos::process_5()
     string n;
     getline(cin, n);
 
-    Aldeano *ptr = cv.buscarAldeano(n);
+    Aldeano *ptr = cv->buscarAldeano(n);
     if(ptr == nullptr){
         cout << "\n\n\tNo se encontro el elemento.";
         getch();
@@ -287,13 +287,13 @@ void Menu_Aldeanos::process_5()
     switch (op)
     {
     case 1:
-        process_5_1(*ptr);
+        process_5_1(ptr);
         break;
     case 2:
-        process_5_2(*ptr);
+        process_5_2(ptr);
         break;
     case 3:
-        process_5_3(*ptr);
+        process_5_3(ptr);
         break;
     default:
         mnsj_error();
@@ -303,10 +303,10 @@ void Menu_Aldeanos::process_5()
 
 void Menu_Aldeanos::process_6()
 {
-    if(cv.total() == 0){
+    if(cv->total() == 0){
         mnsj_error();
         return;
     }
-    cv.mostrarAldeanos();
+    cv->mostrarAldeanos();
     getch();
 }
