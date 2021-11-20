@@ -67,10 +67,12 @@ int Civilizacion::getPuntuacion()
 void Civilizacion::agregarInicio(const Aldeano &a)
 {
     aldeanos.push_front(a);
+    puntuacion = puntuacion +100;
 }
 void Civilizacion::agregarFinal(const Aldeano &a)
 {
     aldeanos.push_back(a);
+    puntuacion = puntuacion +100;
 }
 
 void Civilizacion::eliminarNombre(const string &nombre)
@@ -80,6 +82,7 @@ void Civilizacion::eliminarNombre(const string &nombre)
 
         if(nombre == a.getNombre()){
             aldeanos.erase(it);
+            puntuacion = puntuacion -100;
             break;
         }
     }
@@ -87,10 +90,12 @@ void Civilizacion::eliminarNombre(const string &nombre)
 void Civilizacion::eliminarEdad()
 {
     aldeanos.remove_if([](const Aldeano &a){return a.getEdad() >= 60;});
+    puntuacion = puntuacion -100;
 }
 void Civilizacion::eliminarSalud(const int &salud)
 {
     aldeanos.remove_if([salud](const Aldeano &a){return a.getSalud() < salud;});
+    puntuacion = puntuacion -100;
 }
 
 void Civilizacion::ordenarNombre()
