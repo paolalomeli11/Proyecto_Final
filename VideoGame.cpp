@@ -1,6 +1,8 @@
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
+// #include "../Headers/VideoGame.h"
+// #include "../Headers/mensajes.h"
 #include "VideoGame.h"
 #include "mensajes.h"
 
@@ -47,7 +49,7 @@ void VideoGame::ordenarY()
 }
 void VideoGame::ordenarPuntuacion()
 {
-    sort(civilizaciones.begin(), civilizaciones.end(), [](Civilizacion c1, Civilizacion c2){return c1.getPuntuacion() < c2.getPuntuacion();});
+    sort(civilizaciones.begin(), civilizaciones.end(), [](Civilizacion c1, Civilizacion c2){return c1.getPuntuacion() > c2.getPuntuacion();});
 }
 
 void VideoGame::eliminar(const string &n)

@@ -2,6 +2,8 @@
 #define CIVILIZACION_H
 
 #include <iostream>
+#include <list>
+#include "Aldeano.h"
 
 using namespace std;
 
@@ -12,6 +14,7 @@ private:
     int X;
     int Y;
     int puntuacion;
+    list<Aldeano> aldeanos;
 
 public:
     Civilizacion();
@@ -25,6 +28,19 @@ public:
     int getX();
     int getY();
     int getPuntuacion();
+    
+    //ADICION ALDEANOS
+    void agregarInicio(const Aldeano &a);
+    void agregarFinal(const Aldeano &a);
+    void eliminarNombre(const string &nombre);
+    void eliminarEdad();
+    void eliminarSalud(const int &salud);
+    void ordenarNombre();
+    void ordenarEdad();
+    void ordenarSalud();
+    void mostrarAldeanos();
+    Aldeano* buscarAldeano(const string &n);
+    size_t total();
 };
 
 #endif //CIVILIZACION_H
