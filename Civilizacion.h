@@ -41,6 +41,10 @@ public:
     void mostrarAldeanos();
     Aldeano* buscarAldeano(const string &n);
     size_t total();
+
+    //ADICION DE LECTURA/ESCRITURA DE ARCHIVOS TXT
+    bool respaldar();
+    bool recuperar();
 };
 
 #endif //CIVILIZACION_H

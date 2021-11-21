@@ -26,7 +26,11 @@ public:
     void eliminar(const string &n);
     Civilizacion* buscar(const string &n);
     int total();
-    void mostrar();
+    void mostrar(); 
+    
+    // ADICION DE LECTURA/ESCRITURA DE ARCHIVOS .TXT
+    void respaldar();
+    void recuperar();
 };
 
 #endif //VIDEOGAME_H

@@ -1,0 +1,12 @@
+Cassiopeia
+Femenino
+1500
+27
+Darius
+Masculino
+1900
+41
+Swain
+Masculino
+2100
+48

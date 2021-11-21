@@ -25,3 +25,9 @@ void mnsj_despedida()
     cout << "\n\tAdios. . . :)\n";
     getch();
 }
+void mnsj_error_desconocido()
+{
+    cout << "\n\n\tAlgo salio mal.";
+    cout << "\n\tPresione cualquier tecla para continuar...\n\n";
+    getch();
+}

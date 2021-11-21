@@ -9,20 +9,19 @@
 #include "Menu_Principal.h"
 #include "Menu_Aldeanos.h"
 #include "mensajes.h"
-
-
+ 
 using namespace std;
 
 Menu_Principal::Menu_Principal(VideoGame &v)
 {
     vg = v;
-    items = {"Establecer username", "Agregar civilizacion", "Insertar", "Inicializar", "Primera civilizacion", "Ultima civilizacion","Ordenar", "Eliminar", "Buscar", "Modificar", "Resumen", "Salir"};
+    items = {"Establecer username", "Agregar civilizacion", "Insertar", "Inicializar", "Primera civilizacion", "Ultima civilizacion","Ordenar", "Eliminar", "Buscar", "Modificar", "Resumen", "Respaldar", "Recuperar", "Salir"};
 }
 
 size_t Menu_Principal::selection()
 {
     printCabecera("MENU",30);
-    print();
+    print(); 
     cout << "\n\n\tOpcion: ";
 
     size_t op;
@@ -64,6 +63,12 @@ size_t Menu_Principal::selection()
         process_11();
         break;
     case 12:
+        process_12();
+        break;
+    case 13:
+        process_13();
+        break;
+    case 14:
         mnsj_despedida();
         break;
     default:
@@ -79,9 +84,24 @@ Civilizacion Menu_Principal::pedirDatos()
     string nombre;
     int x, y, puntuacion;
 
-    fflush(stdin);
-    cout << "\n\tNombre: ";
-    getline(cin, nombre);
+    bool ocupado = true;
+    do{
+        system("cls");
+        printCabecera("AGREGAR",45);
+
+        fflush(stdin);
+        cout << "\n\tNombre: ";
+        getline(cin, nombre);
+
+        Civilizacion *ptr = vg.buscar(nombre);
+        if(ptr == nullptr)
+            ocupado = false;
+        else{
+            cout << "\n\n\tEse nombre ya se encuentra ocupado.";
+            getch();
+        }
+    }while(ocupado);
+
 
     cout << "\tUbicacion en X: ";
     cin >> x;
@@ -146,7 +166,18 @@ void Menu_Principal::process_4()
     cin >> n;
 
     Civilizacion c = pedirDatos();
-    vg.inicializar(c, n);
+    string nb = c.getNombre();
+    int x = c.getX();
+    int y = c.getY();
+
+    for(size_t i=0; i<n; i++){
+        string s;
+        c.setNombre(nb + " " + to_string(i+1));
+        c.setX(c.getX() + 10);
+        c.setY(c.getY() + 10);
+        vg.agregarCivilizacion(c);
+    }
+    //vg.inicializar(c, n);
     mnsj_exito();
 }
 
@@ -243,20 +274,23 @@ void Menu_Principal::process_9()
     cout << "\n\tNombre de la civilizacion: "; cin.ignore();
     getline(cin, n);
 
+    Civilizacion *ptr = vg.buscar(n);
+
+    if(ptr == nullptr){
+        cout << "\n\n\tNo se encontro la civilizacion.";
+        return;
+    }
     system("cls");
     printCabecera("RESULTADO DE LA BUSQUEDA",75);
-    Civilizacion *ptr = vg.buscar(n);
+    ptr->print();
     getch();
     system("cls");
-
-    if(ptr == nullptr)
-        return;
 
     Menu_Aldeanos m_a(*ptr);
     size_t op;
     do{
         op = m_a.selection();
-    }while(op < 7);
+    }while(op != 7);
 }
 
 void Menu_Principal::process_10()
@@ -271,13 +305,15 @@ void Menu_Principal::process_10()
     string n;
     getline(cin, n);
 
-    cout << endl << endl;
-    printCabecera("RESULTADO",75);
     Civilizacion *ptr = vg.buscar(n);
+
     if(ptr == nullptr){
-        getch();
+        cout << "\n\n\tNo se encontro la civilizacion.";
         return;
     }
+    system("cls");
+    printCabecera("RESULTADO DE LA BUSQUEDA",75);
+    ptr->print();
     getch();
     system("cls");
     size_t op;
@@ -340,5 +376,20 @@ void Menu_Principal::process_11()
     printCabecera("CIVILIZACIONES",75);
     vg.mostrar();
     getch();
+}
+
+void Menu_Principal::process_12()
+{
+    if(vg.total() == 0){
+        mnsj_error();
+        return;
+    }
+    system("cls");
+    vg.respaldar();
+}
+
+void Menu_Principal::process_13()
+{
+    vg.recuperar();
 }
  

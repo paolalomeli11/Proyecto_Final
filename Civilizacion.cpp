@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <iterator>
+#include <fstream>
 // #include "../Headers/Civilizacion.h"
 #include "Civilizacion.h"
 
@@ -146,4 +147,60 @@ Aldeano* Civilizacion::buscarAldeano(const string &n)
 }
 size_t Civilizacion::total(){
     return aldeanos.size();
+}
+
+bool Civilizacion::respaldar()
+{
+    ofstream archivo(nombre + ".txt");
+
+    bool exito = false;
+
+    if(archivo.is_open()){  
+      for(auto it=aldeanos.begin(); it != aldeanos.end(); it++)
+        {
+            Aldeano &aldeano = *it;
+            archivo << aldeano.getNombre() << endl;
+            archivo << aldeano.getGenero() << endl;
+            archivo << aldeano.getSalud() << endl;
+            archivo << aldeano.getEdad() << endl;
+        }
+        exito = true;  
+    }
+    archivo.close();
+    return exito;
+}
+bool Civilizacion::recuperar()
+{   
+    ifstream archivo(nombre + ".txt");
+    bool exito = true;
+
+    Aldeano ald;
+    string s;
+    int i;
+    if(archivo.is_open()){
+        while(true)
+        {
+            getline(archivo, s);
+            if(archivo.eof())
+                break;
+            ald.setNombre(s);
+
+            getline(archivo, s);
+            ald.setGenero(s);
+
+            getline(archivo, s);
+            i = stoi(s);
+            ald.setSalud(i);
+
+            getline(archivo, s);
+            i = stoi(s);
+            ald.setEdad(i);
+
+            agregarFinal(ald);
+        }
+        archivo.close();
+    }
+    else
+        exito = false;
+    return exito;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
+#include <fstream>
 // #include "../Headers/VideoGame.h"
 // #include "../Headers/mensajes.h"
 #include "VideoGame.h"
@@ -76,11 +77,6 @@ Civilizacion* VideoGame::buscar(const string &n)
         if(it->getNombre() == n)
             i = &(*it);
     }
-    if(i == nullptr)
-        cout << "\n\tNo se encontro la civilizacion.";
-    else
-        i->print();
-    
     return i;
 }
 
@@ -105,4 +101,74 @@ void VideoGame::mostrar()
         cout << setw(20) << civilizaciones[i].getY();
         cout << setw(20) << civilizaciones[i].getPuntuacion() << "\n\t";
     }
+}
+
+void VideoGame::respaldar()
+{
+    bool exito = true;
+
+    ofstream archivo("Civilizaciones.txt");
+    if(!archivo.is_open()){
+        mnsj_error_desconocido();
+        return;
+    }
+
+    for (auto it=civilizaciones.begin(); it < civilizaciones.end(); it++)
+    {
+        Civilizacion &civilizacion = *it;
+        archivo << civilizacion.getNombre() << endl;
+        archivo << civilizacion.getX() << endl;
+        archivo << civilizacion.getY() << endl;
+        archivo << civilizacion.getPuntuacion() << endl;
+
+        exito = it->respaldar();
+    }
+    archivo.close();
+    if(exito)
+        mnsj_exito();
+    else
+        mnsj_error_desconocido();
+}
+void VideoGame::recuperar()
+{
+    ifstream archivo("Civilizaciones.txt");
+
+    if(!archivo.is_open()){
+        mnsj_error_desconocido();
+        return;
+    }
+
+    civilizaciones.clear();
+    Civilizacion civ;
+    string s;
+    int i;
+
+    while(true)
+    {
+        getline(archivo, s);
+        if(archivo.eof())
+            break;
+        civ.setNombre(s);
+
+        getline(archivo, s);
+        i = stoi(s);
+        civ.setX(i);
+
+        getline(archivo, s);
+        i = stoi(s);
+        civ.setY(i);
+
+        getline(archivo, s);
+        i = stoi(s);
+        civ.setPuntuacion(i);
+
+        agregarCivilizacion(civ);
+    }
+    archivo.close();
+
+    for (auto it=civilizaciones.begin(); it!=civilizaciones.end(); it++)
+    {
+        it->recuperar();
+    }
+    mnsj_exito();
 }

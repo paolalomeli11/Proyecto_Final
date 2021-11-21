@@ -1,0 +1,12 @@
+Ekko
+Masculino
+1600
+19
+Jinx
+Femenino
+1400
+22
+Singed
+Masculino
+1900
+52
