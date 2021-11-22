@@ -278,6 +278,7 @@ void Menu_Principal::process_9()
 
     if(ptr == nullptr){
         cout << "\n\n\tNo se encontro la civilizacion.";
+        getch();
         return;
     }
     system("cls");

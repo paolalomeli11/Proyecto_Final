@@ -26,10 +26,10 @@ void Aldeano::setEdad(size_t e)
 }
 void Aldeano::print()
 {
-    cout << right << setw(7) << "Nombre:\t" << nombre;
-    cout << right << setw(7) << "Genero:\t" << genero;
-    cout << right << setw(7) << "Salud:\t" << salud;
-    cout << right << setw(7) << "Edad:\t" << edad;
+    cout << right << setw(7) << "\n\tNombre:\t" << nombre << endl;
+    cout << right << setw(7) << "\tGenero:\t" << genero << endl;
+    cout << right << setw(7) << "\tSalud:\t" << salud << endl;
+    cout << right << setw(7) << "\tEdad:\t" << edad << endl;
 }
 string Aldeano::getNombre() const
 {

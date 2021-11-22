@@ -118,8 +118,16 @@ void process_2_1(Civilizacion *cv)
     string n;
     getline(cin, n);
 
-    cv->eliminarNombre(n);
-    mnsj_exito();
+    Aldeano *ptr = cv->buscarAldeano(n);
+
+    if(ptr == nullptr){
+        cout << "\n\tNo se encontro el elemento.";
+    }
+    else{
+        cv->eliminarNombre(n);
+        mnsj_exito();
+    }
+    
 }
 void process_2_2(Civilizacion *cv)
 {
@@ -223,6 +231,8 @@ void Menu_Aldeanos::process_4()
         return;
     }
     system("cls");
+
+    printCabecera("ALDEANO", 30);
     ptr->print();
     getch();
 }
