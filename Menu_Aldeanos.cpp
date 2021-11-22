@@ -223,6 +223,7 @@ void Menu_Aldeanos::process_4()
         return;
     }
     system("cls");
+    printCabecera("ALDEANO", 30);
     ptr->print();
     getch();
 }
