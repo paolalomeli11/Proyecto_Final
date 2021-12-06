@@ -286,7 +286,7 @@ void Menu_Principal::process_9()
     system("cls");
 
     printCabecera("ADMINISTRAR",45);
-    cout << "\n\n\t1) Aldeanos";
+    cout << "\n\t1) Aldeanos";
     cout << "\n\t2) Barcos";
     cout << "\n\n\tOpcion: ";
     size_t op;

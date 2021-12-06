@@ -47,9 +47,22 @@ string Guerrero::getTipo()
 }
 void Guerrero::print()
 {
-    cout << right << setw(7) << "\n\tID:\t" << id << endl;
-    cout << right << setw(7) << "\tSALUD:\t" << salud << endl;
-    cout << right << setw(7) << "\tFUERZA:\t" << fuerza << endl;
-    cout << right << setw(7) << "\tESCUDO:\t" << escudo << endl;
-    cout << right << setw(7) << "\tTIPO:\t" << tipo << endl;
+    cout << left << endl << "\t";
+    cout << setw(15) << "ID";
+    cout << setw(15) << "SALUD";
+    cout << setw(15) << "FUERZA";
+    cout << setw(15) << "ESCUDO";
+    cout << setw(15) << "TIPO";
+    cout << left << endl << "\t";
+    for(size_t i=0; i<75; i++){
+        printf("%c",205);
+    }
+    cout << left << "\n\t";
+
+    cout << setw(15) << id;
+    cout << setw(15) << salud;
+    cout << setw(15) << fuerza;
+    cout << setw(15) << escudo;
+    cout << setw(15) << tipo << "\n\t";
+
 }

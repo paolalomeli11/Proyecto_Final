@@ -44,6 +44,13 @@ void Menu_Barcos::process_1()
 {
     Barco *b = new Barco();
     size_t id = cv->totalBarcos() + 1000;
+
+    printCabecera("AGREGAR BARCO",45);
+    cout << "\n\n\tCombustible: ";
+    int c;
+    cin >> c;
+
+    b->setCombustible(c);
     
     b->setId(id);
     cv->agregarBarco(b);
@@ -75,12 +82,9 @@ void Menu_Barcos::process_3()
     cout << "\n\n\tID: ";
     int id;
     cin >> id;
-    Barco *&b = cv->buscarBarco(id);
+    Barco *b = &(cv->buscarBarco(id));
 
-    cout << "\n\n\tDIRECCION 2: " << b;
-    system("pause");
-
-    if(b == nullptr){
+    if(!cv->barcoEncontrado(id)){
         cout << "\n\n\tNo se encontro el elemento.\n\n\t";
         system("pause");
         return;
@@ -91,7 +95,7 @@ void Menu_Barcos::process_3()
     do{
         system("cls");
         printCabecera("GUERREROS",45);
-        cout << "\n\n\t1) Agregar";
+        cout << "\n\t1) Agregar";
         cout << "\n\t2) Eliminar";
         cout << "\n\t3) Mostrar ultimo";
         cout << "\n\t4) Mostrar todos";
@@ -121,8 +125,40 @@ void Menu_Barcos::process_3()
             cin >> i;
             g.setEscudo(i);
 
-            b->agregarGuerrero(g);
+            size_t tipo;
 
+            do{
+                system("cls");
+                cout << "\n\tTipo: ";
+                cout << "\n\t1) Asesino";
+                cout << "\n\t2) Luchador";
+                cout << "\n\t3) Tirador";
+                cout << "\n\t4) Mago";
+                cout << "\n\n\tOpcion: ";
+
+                cin >> tipo;
+
+                switch (tipo)
+                {
+                case 1:
+                    g.setTipo("Asesino");
+                    break;
+                case 2:
+                    g.setTipo("Luchador");
+                    break;
+                case 3:
+                    g.setTipo("Tirador");
+                    break;
+                case 4:
+                    g.setTipo("Mago");
+                    break;
+                default:
+                    break;
+                }
+                cout << "\r\b\b\b ";
+            }while(tipo > 4 | tipo < 1);
+
+            b->agregarGuerrero(g);
         }
         else if(op == 2){
             if(b->totalGuerreros() == 0){
@@ -135,32 +171,31 @@ void Menu_Barcos::process_3()
             }
         }
         else if(op == 3){
+            system("cls");
             if(b->totalGuerreros() == 0){
-                system("cls");
                 cout << "\n\n\tNada que mostrar.\n\n\t";
                 system("pause");
             }
             else{
                 Guerrero g = b->tope();
-                system("cls");
                 g.print();
                 cout << "\n\n\t";
                 system("pause");
             }
         }
         else if(op == 4){
+            system("cls");
             if(b->totalGuerreros() == 0){
-                system("cls");
                 cout << "\n\n\tNada que mostrar.\n\n\t";
                 system("pause");
             }
             else{
                 b->mostrarGuerreros();
+                cout << "\n\n\t";
+                system("pause");
             }
         }
     }while(op != 5);
-
-
 }
 void Menu_Barcos::process_4()
 {
@@ -192,7 +227,11 @@ void Menu_Barcos::process_4()
     }
     else if(op == 2)
     {
-        
+        printCabecera("ELIMINAR BARCO",45);
+        cout << "\n\n\tCombustible: ";
+        int com;
+        cin >> com;
+        cv->eliminarBarcoCombustible(com);
     }
 
 }

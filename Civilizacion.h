@@ -51,7 +51,8 @@ public:
     //ADICION DE BARCOS Y GUERREROS
     void agregarBarco(Barco *&b);
     void mostrarBarcos();
-    Barco*& buscarBarco(int i);
+    Barco& buscarBarco(int i);
+    bool barcoEncontrado(int i);
     void eliminarBarcoId(int i);
     void eliminarBarcoCombustible(const int &i);
     size_t totalBarcos();

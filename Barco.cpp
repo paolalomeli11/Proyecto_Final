@@ -42,7 +42,7 @@ int Barco::getArmadura()
 
 void Barco::agregarGuerrero(const Guerrero &g)
 {
-
+    guerreros.push(g);
 }
 void Barco::eliminarGuerrero()
 {
@@ -61,10 +61,11 @@ void Barco::mostrarGuerreros()
     cout << left << endl << "\t";
     cout << setw(15) << "ID";
     cout << setw(15) << "SALUD";
+    cout << setw(15) << "FUERZA";
     cout << setw(15) << "ESCUDO";
     cout << setw(15) << "TIPO";
     cout << left << endl << "\t";
-    for(size_t i=0; i<50; i++){
+    for(size_t i=0; i<75; i++){
         printf("%c",205);
     }
     cout << left << "\n\t";
@@ -75,7 +76,10 @@ void Barco::mostrarGuerreros()
     {
         cout << setw(15) << copia.top().getId();
         cout << setw(15) << copia.top().getSalud();
+        cout << setw(15) << copia.top().getFuerza();
         cout << setw(15) << copia.top().getEscudo();
         cout << setw(15) << copia.top().getTipo() << "\n\t";
+
+        copia.pop();
     }
 }

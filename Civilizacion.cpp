@@ -216,7 +216,6 @@ void Civilizacion::mostrarBarcos()
     cout << setw(15) << "COMBUSTIBLE";
     cout << setw(15) << "VELOCIDAD";
     cout << setw(15) << "ARMADURA";
-    cout << setw(15) << "DIRECCION";
     cout << left << endl << "\t";
     for(size_t i=0; i<60; i++){
         printf("%c",205);
@@ -226,23 +225,30 @@ void Civilizacion::mostrarBarcos()
         cout << setw(15) << (*it)->getId();
         cout << setw(15) << (*it)->getCombustible();
         cout << setw(15) << (*it)->getVelocidad();
-        cout << setw(15) << (*it)->getArmadura();
-        cout << setw(15) << &(*it) << "\n\t";
+        cout << setw(15) << (*it)->getArmadura() << "\n\t";
     }
 }
-Barco*& Civilizacion::buscarBarco(int i)
+Barco& Civilizacion::buscarBarco(int i)
 {
-    Barco **n = nullptr;
+    Barco *n;
 
     for(auto it = barcos.begin() ; it != barcos.end(); ++it){
         if((*it)->getId() == i){
-            n = (*it);
-            cout << "\n\n\tDIRECCION: " << &(*it);
-            cout << "\n\n\tDIRECCION 0.1: " << *n;
-            system("pause");
+            n = &(*(*it));
         }
     }
     return *n;
+}
+bool Civilizacion::barcoEncontrado(int i)
+{
+    bool found = false;
+
+    for(auto it = barcos.begin() ; it != barcos.end(); ++it){
+        if((*it)->getId() == i){
+            found = true;
+        }
+    }
+    return found;
 }
 void Civilizacion::eliminarBarcoId(int i)
 {
