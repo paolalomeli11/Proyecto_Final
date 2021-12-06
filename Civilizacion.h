@@ -4,6 +4,7 @@
 #include <iostream>
 #include <list>
 #include "Aldeano.h"
+#include "Barco.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ private:
     int Y;
     int puntuacion;
     list<Aldeano> aldeanos;
+    list<Barco*> barcos;
 
 public:
     Civilizacion();
@@ -45,6 +47,14 @@ public:
     //ADICION DE LECTURA/ESCRITURA DE ARCHIVOS TXT
     bool respaldar();
     bool recuperar();
+
+    //ADICION DE BARCOS Y GUERREROS
+    void agregarBarco(Barco *&b);
+    void mostrarBarcos();
+    Barco*& buscarBarco(int i);
+    void eliminarBarcoId(int i);
+    void eliminarBarcoCombustible(const int &i);
+    size_t totalBarcos();
 };
 
 #endif //CIVILIZACION_H

@@ -1,8 +1,5 @@
 #include <iostream>
 #include <conio.h>
-// #include "Headers/VideoGame.h"
-// #include "Menu/Menu_Principal.h"
-// #include "Headers/mensajes.h"
 #include "VideoGame.h"
 #include "Menu_Principal.h"
 #include "mensajes.h"

@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <iterator>
 #include <fstream>
-// #include "../Headers/Civilizacion.h"
+
 #include "Civilizacion.h"
 
 Civilizacion::Civilizacion()
@@ -203,4 +203,65 @@ bool Civilizacion::recuperar()
     else
         exito = false;
     return exito;
+}
+
+void Civilizacion::agregarBarco(Barco *&b)
+{
+    barcos.push_back(b);
+}
+void Civilizacion::mostrarBarcos()
+{
+    cout << left << endl << "\t";
+    cout << setw(15) << "ID";
+    cout << setw(15) << "COMBUSTIBLE";
+    cout << setw(15) << "VELOCIDAD";
+    cout << setw(15) << "ARMADURA";
+    cout << setw(15) << "DIRECCION";
+    cout << left << endl << "\t";
+    for(size_t i=0; i<60; i++){
+        printf("%c",205);
+    }
+    cout << left << "\n\t";
+    for(auto it = barcos.begin() ; it != barcos.end(); ++it){
+        cout << setw(15) << (*it)->getId();
+        cout << setw(15) << (*it)->getCombustible();
+        cout << setw(15) << (*it)->getVelocidad();
+        cout << setw(15) << (*it)->getArmadura();
+        cout << setw(15) << &(*it) << "\n\t";
+    }
+}
+Barco*& Civilizacion::buscarBarco(int i)
+{
+    Barco **n = nullptr;
+
+    for(auto it = barcos.begin() ; it != barcos.end(); ++it){
+        if((*it)->getId() == i){
+            n = (*it);
+            cout << "\n\n\tDIRECCION: " << &(*it);
+            cout << "\n\n\tDIRECCION 0.1: " << *n;
+            system("pause");
+        }
+    }
+    return *n;
+}
+void Civilizacion::eliminarBarcoId(int i)
+{
+    for(auto it = barcos.begin(); it != barcos.end(); it++){
+        Barco *&b = *it;
+
+        if(i == b->getId()){
+            barcos.erase(it);
+            cout << "\n\n\tOperacion exitosa.\n\n\t";
+            system("pause");
+            break;
+        }
+    }
+}
+void Civilizacion::eliminarBarcoCombustible(const int &i)
+{
+    barcos.remove_if([i](Barco*& b){return b->getCombustible() < i;});
+}
+size_t Civilizacion::totalBarcos()
+{
+    return barcos.size();
 }

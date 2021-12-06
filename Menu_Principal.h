@@ -5,7 +5,6 @@
 #include <string>
 #include <iomanip>
 
-// #include "../Headers/VideoGame.h"
 #include "VideoGame.h"
 #include "Menu.h"
 
@@ -15,6 +14,7 @@ class Menu_Principal : public Menu
 {
 private:
     VideoGame vg;
+    
 public:
     Menu_Principal(VideoGame &v);
     size_t selection();

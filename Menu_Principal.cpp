@@ -3,11 +3,9 @@
 #include <iomanip>
 #include <conio.h>
 
-// #include "../Menu/Menu_Principal.h"
-// #include "../Menu/Menu_Aldeanos.h"
-// #include "../Headers/mensajes.h"
 #include "Menu_Principal.h"
 #include "Menu_Aldeanos.h"
+#include "Menu_Barcos.h"
 #include "mensajes.h"
  
 using namespace std;
@@ -287,11 +285,27 @@ void Menu_Principal::process_9()
     getch();
     system("cls");
 
-    Menu_Aldeanos m_a(*ptr);
+    printCabecera("ADMINISTRAR",45);
+    cout << "\n\n\t1) Aldeanos";
+    cout << "\n\t2) Barcos";
+    cout << "\n\n\tOpcion: ";
     size_t op;
-    do{
-        op = m_a.selection();
-    }while(op != 7);
+    cin >> op;
+
+    if(op == 1){
+       Menu_Aldeanos m_a(*ptr);
+        size_t op;
+        do{
+            op = m_a.selection();
+        }while(op != 7); 
+    }
+    else if(op == 2){
+        Menu_Barcos m_b(*ptr);
+        size_t op;
+        do{
+            op = m_b.selection();
+        }while(op != 5);
+    }
 }
 
 void Menu_Principal::process_10()
